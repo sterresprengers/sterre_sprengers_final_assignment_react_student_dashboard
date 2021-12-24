@@ -1,10 +1,15 @@
+import React from "react"
 import './App.css';
+import MainContainer from "./routes/MainContainer"
 
 function App() {
   return (
     <div>
-      <p>Hello world</p>
+      {/* <NavBar /> */}
+      <MainContainer />
+      {/* <Footer /> */}
     </div>
+
   );
 }
 
