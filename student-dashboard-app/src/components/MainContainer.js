@@ -2,6 +2,8 @@ import React, { useState, useEffect} from "react"
 import { csv } from "d3"
 import Chart from "./Chart"
 import Table from "./Table"
+import { Link } from "react-router-dom"
+
 
 function MainContainer() {
     // string-values to numbers + adding id and filter 
@@ -10,7 +12,7 @@ function MainContainer() {
     d.valuation = +d.valuation
     d.id = d.name+d.assignment
     d.filter = true
-    d.checked = false
+    d.checked = true
     return d
     }
 
@@ -21,17 +23,7 @@ function MainContainer() {
         const selectedCheckbox = e.target.value
         console.log("checkbox was changed with", selectedCheckbox)
         setData(() => wincData.map(data => {
-            if (selectedCheckbox == data.name && data.checked === false) {
-                return {
-                    name: data.name,
-                    assignment: data.assignment,
-                    difficulty: data.difficulty,
-                    valuation: data.valuation,
-                    id: data.id,
-                    filter: data.filter,
-                    checked: true
-                }
-            } else if (selectedCheckbox == data.name && data.checked === true) {
+            if (selectedCheckbox == data.name && data.checked === true) {
                 return {
                     name: data.name,
                     assignment: data.assignment,
@@ -41,7 +33,7 @@ function MainContainer() {
                     filter: data.filter,
                     checked: false
                 }
-            } else if (selectedCheckbox !== data.name && data.checked === true) {
+            } else if (selectedCheckbox == data.name && data.checked === false) {
                 return {
                     name: data.name,
                     assignment: data.assignment,
@@ -50,6 +42,16 @@ function MainContainer() {
                     id: data.id,
                     filter: data.filter,
                     checked: true
+                }
+            } else if (selectedCheckbox !== data.name && data.checked === false) {
+                return {
+                    name: data.name,
+                    assignment: data.assignment,
+                    difficulty: data.difficulty,
+                    valuation: data.valuation,
+                    id: data.id,
+                    filter: data.filter,
+                    checked: false
                 }
             } else {
                 return {
@@ -59,7 +61,7 @@ function MainContainer() {
                     valuation: data.valuation,
                     id: data.id,
                     filter: data.filter,
-                    checked: false
+                    checked: true
                 }
             }
         }))
@@ -145,7 +147,6 @@ function MainContainer() {
 
     function handleNameRoute(e) {
         const clickedName = e.target.value
-        console.log("a name button was clicked with", clickedName)
         setData(() => wincData.map(data => {
             if (clickedName == data.name) {
                 return {
@@ -171,11 +172,33 @@ function MainContainer() {
         }))
     }
 
+    function showAllStudents() {
+        const defaultFilterValuation = document.querySelector("#valuation-filter")
+        defaultFilterValuation.value = ""
+        const defaultFilterDifficulty = document.querySelector("#difficulty-filter")
+        defaultFilterDifficulty.value = ""
+        console.log("showAllStudents button was clicked")
+        setData(() => wincData.map(data => {
+            return {
+                name: data.name,
+                assignment: data.assignment,
+                difficulty: data.difficulty,
+                valuation: data.valuation,
+                id: data.id,
+                filter: true,
+                checked: true
+            }
+        }))
+    }
+
     return (
         <div>
-            <h1>Student Dashboard</h1>
+            <h1>Dashboard</h1>
+            <Link to="/"><button onClick={showAllStudents}>Show all students</button></Link>
             <Chart data={wincData} />
-            <Table 
+            <h1>Data</h1>
+            <Table
+                className="bar-chart" 
                 data={wincData} 
                 filterDifficulty={filterDifficulty} 
                 filterValuation={filterValuation}
