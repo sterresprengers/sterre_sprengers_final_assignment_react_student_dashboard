@@ -9,3 +9,5 @@ Source: https://www.youtube.com/watch?v=OacqgtI30pk&ab_channel=CurranKelleher
 Installed library: Victory (npm install victory)
 get started: https://formidable.com/open-source/victory/docs 
 
+Notes to self: 
+- can I seperate all onChange (filters and checkboxes) from MainContainer.js to other file(s)? It's getting too long in there. 

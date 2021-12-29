@@ -1,9 +1,16 @@
 import React from "react"
 
-function TableItem({dataRow}) {
+function TableItem({dataRow, filterNameCheckbox }) {
+
     return (
         <tr>
-            <td><input type="checkbox" value="checkbox" name="checkbox"/></td>
+            <td><input 
+                    type="checkbox" 
+                    value={dataRow.name} 
+                    onChange={filterNameCheckbox}
+                    checked={dataRow.checked}
+                />
+            </td>
             <td>{dataRow.name}</td>
             <td>{dataRow.assignment}</td>
             <td>{dataRow.difficulty}</td>

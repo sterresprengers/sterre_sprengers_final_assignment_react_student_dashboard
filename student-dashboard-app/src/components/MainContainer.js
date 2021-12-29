@@ -10,11 +10,60 @@ function MainContainer() {
     d.valuation = +d.valuation
     d.id = d.name+d.assignment
     d.filter = true
+    d.checked = false
     return d
     }
 
     const [wincData, setData] = useState([]);
     useEffect(() => {csv('data.csv', row).then(setData)}, []);
+
+    function filterNameCheckbox(e) {
+        const selectedCheckbox = e.target.value
+        console.log("checkbox was changed with", selectedCheckbox)
+        setData(() => wincData.map(data => {
+            if (selectedCheckbox == data.name && data.checked === false) {
+                return {
+                    name: data.name,
+                    assignment: data.assignment,
+                    difficulty: data.difficulty,
+                    valuation: data.valuation,
+                    id: data.id,
+                    filter: data.filter,
+                    checked: true
+                }
+            } else if (selectedCheckbox == data.name && data.checked === true) {
+                return {
+                    name: data.name,
+                    assignment: data.assignment,
+                    difficulty: data.difficulty,
+                    valuation: data.valuation,
+                    id: data.id,
+                    filter: data.filter,
+                    checked: false
+                }
+            } else if (selectedCheckbox !== data.name && data.checked === true) {
+                return {
+                    name: data.name,
+                    assignment: data.assignment,
+                    difficulty: data.difficulty,
+                    valuation: data.valuation,
+                    id: data.id,
+                    filter: data.filter,
+                    checked: true
+                }
+            } else {
+                return {
+                    name: data.name,
+                    assignment: data.assignment,
+                    difficulty: data.difficulty,
+                    valuation: data.valuation,
+                    id: data.id,
+                    filter: data.filter,
+                    checked: false
+                }
+            }
+        }))
+    }
 
     function filterDifficulty(e) {
         const defaultFilter = document.querySelector("#valuation-filter")
@@ -28,7 +77,8 @@ function MainContainer() {
                     difficulty: data.difficulty,
                     valuation: data.valuation,
                     id: data.id,
-                    filter: true
+                    filter: true,
+                    checked: data.checked
                 }
             } else if (selectedFilter == data.difficulty) {
                 return {
@@ -37,7 +87,8 @@ function MainContainer() {
                     difficulty: data.difficulty,
                     valuation: data.valuation,
                     id: data.id,
-                    filter: true
+                    filter: true,
+                    checked: data.checked
                 }
             } else {
                 return {
@@ -46,7 +97,8 @@ function MainContainer() {
                     difficulty: data.difficulty,
                     valuation: data.valuation,
                     id: data.id,
-                    filter: false
+                    filter: false,
+                    checked: data.checked
                 }
             }
         }))
@@ -64,7 +116,8 @@ function MainContainer() {
                     difficulty: data.difficulty,
                     valuation: data.valuation,
                     id: data.id,
-                    filter: true
+                    filter: true,
+                    checked: data.checked
                 }
             } else if (selectedFilter == data.valuation) {
                 return {
@@ -73,7 +126,8 @@ function MainContainer() {
                     difficulty: data.difficulty,
                     valuation: data.valuation,
                     id: data.id,
-                    filter: true
+                    filter: true,
+                    checked: data.checked
                 }
             } else {
                 return {
@@ -82,7 +136,8 @@ function MainContainer() {
                     difficulty: data.difficulty,
                     valuation: data.valuation,
                     id: data.id,
-                    filter: false
+                    filter: false,
+                    checked: data.checked
                 }
             }
         }))
@@ -96,6 +151,7 @@ function MainContainer() {
                 data={wincData} 
                 filterDifficulty={filterDifficulty} 
                 filterValuation={filterValuation}
+                filterNameCheckbox={filterNameCheckbox}            
             />
         </div>
     )

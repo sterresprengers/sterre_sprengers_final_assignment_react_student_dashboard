@@ -1,10 +1,15 @@
-import React, {useState} from "react"
+import React from "react"
 import TableItem from "./TableItem"
+import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 
-function Table({data, filterDifficulty, filterValuation}) {    
+function Table({data, filterDifficulty, filterValuation, filterNameCheckbox }) {    
     const setTable = data.map((dataRow) => {
         if (dataRow.filter === true) {
-            return <TableItem key={dataRow.id} dataRow={dataRow}/>
+            return <TableItem 
+                        key={dataRow.id} 
+                        dataRow={dataRow} 
+                        filterNameCheckbox={filterNameCheckbox}
+                    />
         } else {
             return
         }
