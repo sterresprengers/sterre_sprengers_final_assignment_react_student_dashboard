@@ -143,6 +143,34 @@ function MainContainer() {
         }))
     }
 
+    function handleNameRoute(e) {
+        const clickedName = e.target.value
+        console.log("a name button was clicked with", clickedName)
+        setData(() => wincData.map(data => {
+            if (clickedName == data.name) {
+                return {
+                    name: data.name,
+                    assignment: data.assignment,
+                    difficulty: data.difficulty,
+                    valuation: data.valuation,
+                    id: data.id,
+                    filter: true,
+                    checked: true
+                }
+            } else {
+                return {
+                    name: data.name,
+                    assignment: data.assignment,
+                    difficulty: data.difficulty,
+                    valuation: data.valuation,
+                    id: data.id,
+                    filter: false,
+                    checked: false
+                }
+            }
+        }))
+    }
+
     return (
         <div>
             <h1>Student Dashboard</h1>
@@ -151,7 +179,8 @@ function MainContainer() {
                 data={wincData} 
                 filterDifficulty={filterDifficulty} 
                 filterValuation={filterValuation}
-                filterNameCheckbox={filterNameCheckbox}            
+                filterNameCheckbox={filterNameCheckbox}
+                handleNameRoute={handleNameRoute}          
             />
         </div>
     )

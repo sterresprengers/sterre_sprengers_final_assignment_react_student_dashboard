@@ -1,6 +1,8 @@
 import React from "react"
+import { Link } from "react-router-dom"
 
-function TableItem({dataRow, filterNameCheckbox }) {
+function TableItem({dataRow, filterNameCheckbox, handleOnClick }) {
+    const url = dataRow.name
 
     return (
         <tr>
@@ -11,7 +13,7 @@ function TableItem({dataRow, filterNameCheckbox }) {
                     checked={dataRow.checked}
                 />
             </td>
-            <td>{dataRow.name}</td>
+            <td><Link to={dataRow.name}><button onClick={handleOnClick} value={dataRow.name}>{dataRow.name}</button></Link></td>
             <td>{dataRow.assignment}</td>
             <td>{dataRow.difficulty}</td>
             <td>{dataRow.valuation}</td>
