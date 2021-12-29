@@ -1,8 +1,6 @@
 import React from "react"
 
 function TableItem({dataRow}) {
-    // console.log("prop in TableItem is", dataRow)
-
     return (
         <tr>
             <td><input type="checkbox" value="checkbox" name="checkbox"/></td>
@@ -13,4 +11,5 @@ function TableItem({dataRow}) {
         </tr>
     )
 }
+
 export default TableItem

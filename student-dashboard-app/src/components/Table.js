@@ -1,16 +1,12 @@
 import React, {useState} from "react"
 import TableItem from "./TableItem"
 
-function Table({data, filterDifficulty, filterValuation}) {
-    // console.log("props given to Table is", data)
-    
+function Table({data, filterDifficulty, filterValuation}) {    
     const setTable = data.map((dataRow) => {
         if (dataRow.filter === true) {
-            // console.log("will be rendered")
             return <TableItem key={dataRow.id} dataRow={dataRow}/>
-        }
-        else {
-            console.log("will not be rendered")
+        } else {
+            return
         }
     })
 
@@ -22,7 +18,7 @@ function Table({data, filterDifficulty, filterValuation}) {
                     <th>Name</th>
                     <th>Assignment</th>
                     <th>
-                        <select value="difficulty-filter" onChange={filterDifficulty}>
+                        <select id="difficulty-filter" onChange={filterDifficulty}>
                             <option value="">--Difficulty--</option>
                             <option value="1">1</option>
                             <option value="2">2</option>
@@ -46,7 +42,6 @@ function Table({data, filterDifficulty, filterValuation}) {
             <tbody>
                 {setTable}
             </tbody>
-
         </table>
     )
 }
