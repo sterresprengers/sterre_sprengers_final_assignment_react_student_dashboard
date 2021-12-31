@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { csv } from "d3";
+import Header from "./Header";
 import Chart from "./Chart";
 import Table from "./Table";
 import { Link } from "react-router-dom";
@@ -202,10 +203,8 @@ function MainContainer() {
   }
 
   return (
-    <div>
-      <h1 className="header-dashboard">Dashboard</h1>
-      <p className="copyright">© Sterre Sprengers 2021</p>
-      <div className="header-line"></div>
+    <>
+      <Header />
       <Link to="/">
         <button className="button-all-students" onClick={showAllData}>
           Show all data
@@ -221,7 +220,7 @@ function MainContainer() {
         filterNameCheckbox={filterNameCheckbox}
         handleNameRoute={handleNameRoute}
       />
-    </div>
+    </>
   );
 }
 
